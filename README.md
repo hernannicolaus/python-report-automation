@@ -24,3 +24,6 @@ It reads CSV/XLSX input files, processes and summarizes data, and generates:
 ```bash
 pip install -r requirements.txt
 python src/main.py
+
+### Ejecutar tests
+python -m pytest
