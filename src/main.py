@@ -1,4 +1,5 @@
 import argparse
+
 from pathlib import Path
 
 from config import (
@@ -12,6 +13,8 @@ from ioUtils import read_input
 from transform import clean_and_cast, build_summaries
 from reportExcel import export_excel
 from reportPdf import export_pdf
+from transform import clean_and_cast, build_summaries, filtrar_por_fechas
+
 
 
 def parse_args():
@@ -42,6 +45,18 @@ def parse_args():
         default=str(DEFAULT_LOG_FILE),
         help="Ruta del archivo de log",
     )
+    parser.add_argument(
+        "--desde",
+        type=str,
+        default=None,
+        help="Fecha desde (inclusive) en formato YYYY-MM-DD",
+    )
+    parser.add_argument(
+        "--hasta",
+        type=str,
+        default=None,
+        help="Fecha hasta (inclusive) en formato YYYY-MM-DD",
+    )
     return parser.parse_args()
 
 
@@ -60,6 +75,12 @@ def main():
         logger.info(f"Archivo leído: {input_path} | filas={len(df_raw)}")
 
         df = clean_and_cast(df_raw)
+        df = filtrar_por_fechas(df, args.desde, args.hasta)
+        logger.info(f"Filtrado por fechas: desde={args.desde} hasta={args.hasta} | filas={len(df)}")
+
+        if len(df) == 0:
+            raise ValueError("No hay datos en el rango de fechas indicado.")
+
 
         total, por_mes, por_categoria, por_medio_pago, top_gastos = build_summaries(df)
 

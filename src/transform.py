@@ -50,3 +50,20 @@ def build_summaries(df: pd.DataFrame):
 
     total = float(tmp["monto"].sum())
     return total, por_mes, por_categoria, por_medio_pago, top_gastos
+
+def filtrar_por_fechas(df: pd.DataFrame, desde: str | None, hasta: str | None) -> pd.DataFrame:
+    """
+    Filtra el DataFrame por columna 'fecha' (inclusive).
+    - desde/hasta: strings tipo 'YYYY-MM-DD' o None.
+    """
+    out = df.copy()
+
+    if desde:
+        fecha_desde = pd.to_datetime(desde, errors="raise")
+        out = out[out["fecha"] >= fecha_desde]
+
+    if hasta:
+        fecha_hasta = pd.to_datetime(hasta, errors="raise")
+        out = out[out["fecha"] <= fecha_hasta]
+
+    return out.reset_index(drop=True)

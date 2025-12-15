@@ -1,5 +1,9 @@
+# Carpetas generadas
+output/
+logs/
+
+# Python
 __pycache__/
 *.pyc
-.env
-logs/
-output/
+*.pyo
+*.pyd
