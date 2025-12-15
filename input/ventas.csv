@@ -1,0 +1,9 @@
+fecha,categoria,descripcion,medio_pago,monto
+2025-11-01,Supermercado,Compra semanal,Débito,23500
+2025-11-02,Transporte,Sube,Saldo,30000
+2025-11-02,Servicios,Internet,Tarjeta,18000
+2025-11-10,Ocio,Cine,Tarjeta,65000
+2025-12-01,Supermercado,Compra semanal,Débito,25200
+2025-12-05,Servicios,Luz,Efectivo,28000
+2025-12-06,Transporte,Uber,Tarjeta,42000
+2025-12-08,Ocio,Salida,Efectivo,120000
